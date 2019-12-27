@@ -1,0 +1,2 @@
+# Paystack = "sk_test_7aaa8e08ab0fe8446615006037419b9ed4ede883"
+# Paystack = Paystack.new(pk_test_00f4154446217080c1b8c2218a1ca532d1b2416b, sk_test_7aaa8e08ab0fe8446615006037419b9ed4ede883)
