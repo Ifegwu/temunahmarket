@@ -17,6 +17,10 @@ class MessagesController < ApplicationController
                           content: message_params[:content]
     )
 
+    # if message_params[:content].blank?
+    #   flash[:alert] = "You cannot post an empty message!"
+    # end
+
     if @message.save
       conversation.update!(updated_at: @message.created_at)
       receiver = conversation.sender.id == current_user.id ? conversation.receiver : conversation.sender
@@ -26,7 +30,7 @@ class MessagesController < ApplicationController
                                   sender: render_message(@message, current_user),
                                   receiver: render_message(@message, receiver)
                                 )
-
+      
       if URI(request.referrer).path == conversation_detail_path(id: receiver.id)
         return render json: {success: true}
       end

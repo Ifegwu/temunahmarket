@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
     before_action :authenticate_user!
+    before_action :is_authorised, only: [:show]
 
     def create
         gig = Gig.find(params[:gig_id])
@@ -38,9 +39,32 @@ class OrdersController < ApplicationController
         end
     end
 
+    def show
+        @order = Order.find(params[:id])
+        @gig = @order.gig_id ? Gig.find(@order.gig_id) : nil
+        @request = @order.request_id ? Request.find(@order.request_id) : nil
+        @comments = Comment.where(order_id: params[:id])
+    end
+
     private
 
+    def is_authorised
+        redirect_to dashboard_path,
+            alert: "You don't have permission" unless Order.where("id = ? AND (seller_id = ? OR buyer_id = ?)",
+                                                                    params[:id], current_user.id, current_user.id)
+    end
+
     def charge(gig, pricing)
+        subscription = Subscription.find_by_user_id(current_user.id)
+        if subscription.present? && subscription.success?
+          plan = Stripe::Plan.retrieve(subscription.plan_id)
+          rate = plan.metadata.commission.to_f/100
+        else
+          rate = 10.0/100
+        end
+
+        amount = pricing.price * 1.1
+
         order = gig.orders.new
         order.due_date = Date.today() + pricing.delivery_time.days
         order.title = gig.title
@@ -48,9 +72,7 @@ class OrdersController < ApplicationController
         order.seller_id = gig.user.id
         order.buyer_name = current_user.full_name
         order.buyer_id = current_user.id
-        order.amount = pricing.price * 1.1
-
-        amount = pricing.price * 1.1
+        order.amount = amount
 
         if params[:payment].blank?
             flash[:alert] = "No payment selected"

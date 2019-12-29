@@ -22,3 +22,6 @@
  @import 'dropzone/dist/basic.css';
  @import 'dropzone/dist/dropzone.css';
  @import 'raty-js/lib/jquery.raty';
+ @import '@fullcalendar/core/main.css';
+ @import '@fullcalendar/daygrid/main.css';
+ @import '@fullcalendar/list/main.css';

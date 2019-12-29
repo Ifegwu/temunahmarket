@@ -71,4 +71,6 @@ Rails.application.configure do
     }
     ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
   end
+  config.hosts = nil
+  # config.hosts << "c528c412.ngrok.io"
 end

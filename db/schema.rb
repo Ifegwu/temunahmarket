@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_26_094555) do
+ActiveRecord::Schema.define(version: 2019_12_28_174456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 2019_12_26_094555) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "active", default: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.uuid "order_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_comments_on_order_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -169,6 +179,17 @@ ActiveRecord::Schema.define(version: 2019_12_26_094555) do
     t.index ["seller_id"], name: "index_reviews_on_seller_id"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "plan_id"
+    t.string "sub_id"
+    t.integer "status", default: 0
+    t.date "expires_at"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.integer "status"
     t.integer "transaction_type"
@@ -215,6 +236,8 @@ ActiveRecord::Schema.define(version: 2019_12_26_094555) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "orders"
+  add_foreign_key "comments", "users"
   add_foreign_key "conversations", "users", column: "receiver_id"
   add_foreign_key "conversations", "users", column: "sender_id"
   add_foreign_key "gigs", "categories"
@@ -234,6 +257,7 @@ ActiveRecord::Schema.define(version: 2019_12_26_094555) do
   add_foreign_key "reviews", "orders"
   add_foreign_key "reviews", "users", column: "buyer_id"
   add_foreign_key "reviews", "users", column: "seller_id"
+  add_foreign_key "subscriptions", "users"
   add_foreign_key "transactions", "gigs"
   add_foreign_key "transactions", "requests"
   add_foreign_key "transactions", "users", column: "buyer_id"
