@@ -1,25 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# TemunahMarket
 
-Things you may want to cover:
+## A web platform demo for digital freelancing services
 
-* Ruby version
+### Things you may want to cover:
 
-* System dependencies
+- Ruby version - ruby '2.6.3', and rails '=6.0.0.beta3'
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# temunahmarket
+- To run the application kindly use "rails server" command.
