@@ -1,7 +1,7 @@
-<nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+<nav class="navbar is-info" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <h1 class="title is-4">Temunah-FL</h1>
+          <figure class="has-icons-left m-t-5"><%= image_tag("home/temlogo.png", :alt => "temunah logo") %></figure>
         </a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -23,7 +23,7 @@
                         <%= text_field_tag 'q', '', class: "input", placeholder: "Try 'logo design" %>
                     </div>
                     <div class="control">
-                        <button class="button is-danger">Search</button>
+                        <button class="button is-danger"><%= t('shared.navbar.button') %></button>
                     </div>
                   </div>
               <% end %>
@@ -64,45 +64,57 @@
 
 <% if (user_signed_in?) && !current_page?(root_path) && !current_page?(plans_path) && !current_page?(search_path) &&  !current_page?("/gigs/#{params[:id]}") && !current_page?("/users/#{params[:id]}") %>
   <nav class="navbar has-shadow" style="z-index: 5">
-      <div class="container">
-        <div class="navbar">
-          <%= link_to 'Dashboard', dashboard_path, class: "navbar-item"%>
-          <%= link_to 'Calendar', calendar_path, class: "navbar-item" %>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Selling</a>
-            <div class="navbar-dropdown">
-              <%= link_to 'Create New Gig', new_gig_path, class: "navbar-item" %>
+     <div class="navbar-brand">
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExampleTwo">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExampletwo" class="navbar-menu">
+        <div class="navbar-start">
+          <div class="container">
+            <div class="navbar">
+              <%= link_to 'Dashboard', dashboard_path, class: "navbar-item"%>
+              <%= link_to 'Calendar', calendar_path, class: "navbar-item" %>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">Selling</a>
+                <div class="navbar-dropdown">
+                  <%= link_to 'Create New Gig', new_gig_path, class: "navbar-item" %>
+                </div>
+              </div>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">Buying</a>
+                <div class="navbar-dropdown">
+                  <%= link_to 'Post Request', new_request_path, class: "navbar-item"%>
+                  <%= link_to 'Manage Request', requests_path, class: "navbar-item" %>
+                </div>
+              </div>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">Buyer Request</a>
+                <div class="navbar-dropdown">
+                  <%= link_to 'Active Request', all_requests_path, class: "navbar-item" %>
+                  <%= link_to 'Offers Sent', my_offers_path, class: "navbar-item" %>
+                </div>
+              </div>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">Orders</a>
+                <div class="navbar-dropdown">
+                  <%= link_to 'Selling Orders', selling_orders_path, class: "navbar-item" %>
+                  <%= link_to 'Buying Orders', buying_orders_path, class: "navbar-item"  %>
+                </div>
+              </div>
+              <%= link_to 'Earnings', earnings_path, class: "navbar-item"%>
+              <%= link_to 'Messages', conversations_path, class: "navbar-item"%>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">Settings</a>
+                <div class="navbar-dropdown">
+                  <%= link_to 'Payment Method', settings_payment_path, class: "navbar-item" %>
+                  <%= link_to 'Payout Method', settings_payout_path, class: "navbar-item" %>
+                </div>
             </div>
           </div>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Buying</a>
-            <div class="navbar-dropdown">
-              <%= link_to 'Post Request', new_request_path, class: "navbar-item"%>
-              <%= link_to 'Manage Request', requests_path, class: "navbar-item" %>
-            </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Buyer Request</a>
-            <div class="navbar-dropdown">
-              <%= link_to 'Active Request', all_requests_path, class: "navbar-item" %>
-              <%= link_to 'Offers Sent', my_offers_path, class: "navbar-item" %>
-            </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Orders</a>
-            <div class="navbar-dropdown">
-              <%= link_to 'Selling Orders', selling_orders_path, class: "navbar-item" %>
-              <%= link_to 'Buying Orders', buying_orders_path, class: "navbar-item"  %>
-            </div>
-          </div>
-          <%= link_to 'Earnings', earnings_path, class: "navbar-item"%>
-          <%= link_to 'Messages', conversations_path, class: "navbar-item"%>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">Settings</a>
-            <div class="navbar-dropdown">
-              <%= link_to 'Payment Method', settings_payment_path, class: "navbar-item" %>
-              <%= link_to 'Payout Method', settings_payout_path, class: "navbar-item" %>
-            </div>
         </div>
       </div>
     </div>
