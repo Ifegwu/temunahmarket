@@ -12,4 +12,4 @@
 
 ## For a demo kindly checkout the link below
 
-### </a href="http://ec2-34-241-196-152.eu-west-1.compute.amazonaws.com/>temunahmarketplace</a>
+### </a href="http://ec2-34-241-196-152.eu-west-1.compute.amazonaws.com">temunahmarketplace</a>
